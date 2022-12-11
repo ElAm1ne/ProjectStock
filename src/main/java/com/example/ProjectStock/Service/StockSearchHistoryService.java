@@ -17,22 +17,27 @@ public class StockSearchHistoryService {
     private StockSearchHistoryEntityRepository repository;
 
     public Optional<StockSearchHistory> findById(Long id) {
+
         return repository.findById(id);
     }
 
     public List<StockSearchHistory> findByTicker(String ticker) {
+
         return repository.findByTicker(ticker);
     }
 
     public List<StockSearchHistory> findByName(String name) {
+
         return repository.findByName(name);
     }
 
     public List<StockSearchHistory> findByDate(Date date) {
+
         return repository.findByDate(date);
     }
 
     public List<StockSearchHistory> findByViews(Long views) {
+
         return repository.findByViews(views);
     }
 
@@ -41,6 +46,7 @@ public class StockSearchHistoryService {
     }
 
     public List<Object[]> getTopNTickersByViews(int n) {
+
         return repository.getTopNTickersByViews(n);
     }
 
