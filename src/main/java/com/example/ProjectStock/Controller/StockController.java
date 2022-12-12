@@ -1,5 +1,6 @@
 package com.example.ProjectStock.Controller;
 import com.example.ProjectStock.Modele.Stock;
+import com.example.ProjectStock.Service.StockSearchHistoryService;
 import com.example.ProjectStock.Service.StockService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ public class StockController {
 
     @Autowired
     private StockService stockService;
+    @Autowired
+    private StockSearchHistoryService stockHistoryService;
 
     @GetMapping("/stocks")
     public List<Stock> getAll(){
@@ -83,7 +86,9 @@ public class StockController {
     public Stock getStockByTickerAndDate(@RequestParam("ticker") String ticker, @RequestParam("date") String date) throws ParseException {
         try
         {
-            return stockService.parseJsonToStock(ticker, new SimpleDateFormat("yyyy-mm-dd").parse(date));
+            Stock stock = stockService.parseJsonToStock(ticker, new SimpleDateFormat("yyyy-mm-dd").parse(date));
+            stockHistoryService.saveHistory(stock);
+            return stock;
         }
         catch (Exception e)
         {

@@ -16,9 +16,6 @@ public class StockSearchHistory {
     @Column(name = "ticker")
     private String ticker;
 
-    @Column(name = "name")
-    private String name;
-
     @Column(name = "date")
     private Date date;
 

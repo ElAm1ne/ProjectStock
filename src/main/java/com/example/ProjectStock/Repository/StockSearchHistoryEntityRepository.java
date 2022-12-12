@@ -1,9 +1,11 @@
 package com.example.ProjectStock.Repository;
 import com.example.ProjectStock.Modele.StockSearchHistory;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -12,16 +14,22 @@ import java.util.Optional;
 @Repository
 public interface StockSearchHistoryEntityRepository extends JpaRepository<StockSearchHistory, Long> {
 
+    List<StockSearchHistory> findAll();
     Optional<StockSearchHistory> findById(Long id);
 
     List<StockSearchHistory> findByTicker(String ticker);
-
-    List<StockSearchHistory> findByName(String name);
 
     List<StockSearchHistory> findByDate(Date date);
 
     List<StockSearchHistory> findByViews(Long views);
 
+    Optional<StockSearchHistory> findByTickerAndDate(String ticker, Date date);
+    @Modifying
+    @Transactional
+    @Query("UPDATE StockSearchHistory s SET s.views = s.views + 1 WHERE s.date = ?2 and s.ticker = ?1")
+    void updateViews(String ticker, Date date);
+
+    boolean existsByTickerAndDate(String ticker, Date date);
     @Query("SELECT SUM(h.views) FROM StockSearchHistory h WHERE h.date BETWEEN :startDate AND :endDate")
     Long getTotalViewsBetweenDates(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
