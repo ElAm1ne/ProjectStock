@@ -13,6 +13,8 @@ public interface StockEntityRepository extends JpaRepository<Stock, Long> {
     Optional<Stock> findById(Long id);
     List<Stock> findByTicker(String ticker);
 
+    List<Stock> findAll();
+
     List<Stock> findByDateBetween(Date startDate, Date endDate);
 
     // Method for retrieving a list of open values for a given ticker and date range

@@ -28,6 +28,9 @@ public class StockService {
         return stockRepository.findById(id);
     }
 
+    public List<Stock> findAllStocks(){
+        return stockRepository.findAll();
+    }
     public List<Stock> findByTicker(String ticker) {
 
         return stockRepository.findByTicker(ticker);
@@ -87,5 +90,17 @@ public class StockService {
 
 
         return stock;
+    }
+
+    public String saveStock(Stock stock)
+    {
+        try {
+            stockRepository.save(stock);
+            return "Saved stock successfully";
+        }
+        catch (Exception e)
+        {
+            return "Problem while saving stock";
+        }
     }
 }

@@ -19,6 +19,10 @@ public class StockController {
     @Autowired
     private StockService stockService;
 
+    @GetMapping("/stocks")
+    public List<Stock> getAll(){
+        return stockService.findAllStocks();
+    }
     @GetMapping("/stocks/{id}")
     public Optional<Stock> findById(@PathVariable Long id) {
         return stockService.findById(id);
@@ -77,6 +81,19 @@ public class StockController {
 
     @GetMapping("/stocks/stock")
     public Stock getStockByTickerAndDate(@RequestParam("ticker") String ticker, @RequestParam("date") String date) throws ParseException {
-        return stockService.parseJsonToStock(ticker, new SimpleDateFormat("yyyy-mm-dd").parse(date));
+        try
+        {
+            return stockService.parseJsonToStock(ticker, new SimpleDateFormat("yyyy-mm-dd").parse(date));
+        }
+        catch (Exception e)
+        {
+            Stock stock = new Stock();
+            return stock;
+        }
+    }
+
+    @PostMapping("/stocks/add-stock")
+    public String AddStockByTickerAndDate(@RequestParam("ticker") String ticker, @RequestParam("date") String date) throws ParseException {
+        return stockService.saveStock(stockService.parseJsonToStock(ticker, new SimpleDateFormat("yyyy-mm-dd").parse(date)));
     }
 }
