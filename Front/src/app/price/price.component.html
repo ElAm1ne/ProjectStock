@@ -1,0 +1,9 @@
+<div>
+<a href="https://www.binance.com/fr" style="text-decoration:none" (click)="augmentevue()">
+<h2>{{prices.titre}}</h2>
+<p>{{prices.prixj}} €</p>
+<span [ngStyle]="{color: prices.prixj-prices.prixv>0 ? 'green' : 'red'}">{{(prices.prixj-prices.prixv)*100/prices.prixv}}%
+</span>
+<p>{{vue}}</p>
+</a>
+</div>
