@@ -23,6 +23,7 @@ public class StockService {
     private StockEntityRepository stockRepository;
     RestTemplate restTemplate = new RestTemplate();
 
+
     public Optional<Stock> findById(Long id) {
 
         return stockRepository.findById(id);
@@ -31,7 +32,7 @@ public class StockService {
     public List<Stock> findAllStocks(){
         return stockRepository.findAll();
     }
-    public List<Stock> findByTicker(String ticker) {
+   public List<Stock> findByTicker(String ticker) {
 
         return stockRepository.findByTicker(ticker);
     }
