@@ -1,2 +1,5 @@
-package com.example.ProjectStock.Dto;public class StockHistoryDTO {
+package com.example.ProjectStock.Dto;
+
+public class StockHistoryDTO {
+
 }
