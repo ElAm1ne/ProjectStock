@@ -1,10 +1,14 @@
 package com.example.ProjectStock.Controller;
 
 import com.example.ProjectStock.Service.StockSearchHistoryService;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.example.ProjectStock.Modele.StockSearchHistory;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -20,8 +24,9 @@ public class StockSearchHistoryController {
         return stockSearchHistoryService.findAll();
     }
     @GetMapping("/{ticker}/{date}")
-    public Optional<StockSearchHistory> findByTickerAndDate(@PathVariable String ticker, @PathVariable Date date) {
-        return stockSearchHistoryService.findByTickerAndDate(ticker, date);
+    public Optional<StockSearchHistory> findByTickerAndDate(@PathVariable String ticker, @PathVariable String date) throws ParseException {
+        Date truncatedDate = DateUtils.truncate(new SimpleDateFormat("yyyy-mm-dd").parse(date), Calendar.DATE);
+        return stockSearchHistoryService.findByTickerAndDate(ticker, truncatedDate);
     }
 
     @GetMapping("/{ticker}")
