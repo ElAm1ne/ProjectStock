@@ -39,5 +39,8 @@ public interface StockSearchHistoryEntityRepository extends JpaRepository<StockS
     @Query("SELECT SUM(h.views) FROM StockSearchHistory h WHERE h.ticker = :ticker AND h.date BETWEEN :startDate AND :endDate")
     Long getTotalViewsForTickerBetweenDates(@Param("ticker") String ticker, @Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
+    @Query("SELECT e.ticker, SUM(e.views) as totalViews FROM StockSearchHistory e WHERE e.date BETWEEN :startDate AND :endDate GROUP BY e.ticker ORDER BY totalViews DESC")
+    List<Object[]> findTopViewsByTicker(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+
 
 }

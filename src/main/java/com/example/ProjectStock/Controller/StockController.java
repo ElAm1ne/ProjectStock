@@ -97,6 +97,22 @@ public class StockController {
         }
     }
 
+    @GetMapping("/stocks/stockBetween")
+    public HashMap<Date, Stock> getStockHistoryByTickerAndDate(@RequestParam("ticker") String ticker, @RequestParam("start") String start_date, @RequestParam("end") String end_date) throws ParseException {
+        try
+        {
+            HashMap<Date, Stock> stock_map = stockService.parseJsonToStockBetweenDates(ticker, new SimpleDateFormat("yyyy-mm-dd").parse(start_date), new SimpleDateFormat("yyyy-mm-dd").parse(end_date));
+            List<Stock> values_stock = new ArrayList<>(stock_map.values());
+            stockHistoryService.saveHistory(values_stock.get(0));
+            return stock_map;
+        }
+        catch (Exception e)
+        {
+            HashMap<Date, Stock> stock_map = new HashMap<Date, Stock>();
+            return stock_map;
+        }
+    }
+
     @PostMapping("/stocks/add-stock")
     public String AddStockByTickerAndDate(@RequestParam("ticker") String ticker, @RequestParam("date") String date) throws ParseException {
         return stockService.saveStock(stockService.parseJsonToStock(ticker, new SimpleDateFormat("yyyy-mm-dd").parse(date)));

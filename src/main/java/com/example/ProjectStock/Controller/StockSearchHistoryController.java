@@ -12,6 +12,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/stock-history")
@@ -39,13 +40,20 @@ public class StockSearchHistoryController {
         return stockSearchHistoryService.getTotalViewsBetweenDates(startDate, endDate);
     }
 
-    @GetMapping("/views/top")
-    public List<Object[]> getTopNTickersByViews(@RequestParam int n) {
-        return stockSearchHistoryService.getTopNTickersByViews(n);
-    }
 
     @GetMapping("/{ticker}/views/total")
     public Long getTotalViewsForTickerBetweenDates(@PathVariable String ticker, @RequestParam Date startDate, @RequestParam Date endDate) {
         return stockSearchHistoryService.getTotalViewsForTickerBetweenDates(ticker, startDate, endDate);
     }
+    @GetMapping("/views/top")
+    public List<Object[]> getTopViewsByTicker( @RequestParam("start") String start_date, @RequestParam("end") String end_date) throws ParseException{
+        return stockSearchHistoryService.getTopViewsByTicker(new SimpleDateFormat("yyyy-mm-dd").parse(start_date), new SimpleDateFormat("yyyy-mm-dd").parse(end_date));
+    }
+
+    @GetMapping("/views/topn")
+    public List<Object[]> getTopnViewsByTicker( @RequestParam("start") String start_date, @RequestParam("end") String end_date, @RequestParam("n") int n) throws ParseException{
+        return stockSearchHistoryService.getTopViewsByTicker(new SimpleDateFormat("yyyy-mm-dd").parse(start_date), new SimpleDateFormat("yyyy-mm-dd").parse(end_date)).stream().limit(n).collect(Collectors.toList());
+    }
+
+
 }

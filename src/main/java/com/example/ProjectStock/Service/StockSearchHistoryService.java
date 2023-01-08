@@ -2,6 +2,7 @@ package com.example.ProjectStock.Service;
 
 import com.example.ProjectStock.Modele.Stock;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import com.example.ProjectStock.Modele.StockSearchHistory;
@@ -70,13 +71,14 @@ public class StockSearchHistoryService {
         return repository.getTotalViewsBetweenDates(startDate, endDate);
     }
 
-    public List<Object[]> getTopNTickersByViews(int n) {
 
-        return repository.getTopNTickersByViews(n);
-    }
 
     public Long getTotalViewsForTickerBetweenDates(String ticker, Date startDate, Date endDate) {
         return repository.getTotalViewsForTickerBetweenDates(ticker, startDate, endDate);
+    }
+
+    public List<Object[]> getTopViewsByTicker(Date startDate, Date endDate){
+        return repository.findTopViewsByTicker(startDate, endDate);
     }
 
 }
