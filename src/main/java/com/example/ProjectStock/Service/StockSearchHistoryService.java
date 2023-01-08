@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.ProjectStock.Modele.StockSearchHistory;
 import com.example.ProjectStock.Repository.StockSearchHistoryEntityRepository;
-
+import org.apache.commons.lang3.time.DateUtils;
 import java.util.*;
 
 @Service
@@ -29,8 +29,10 @@ public class StockSearchHistoryService {
     public void saveHistory(Stock stock){
         StockSearchHistory mappedValue = new StockSearchHistory();
         mappedValue.setTicker(stock.getTicker());
-        mappedValue.setDate(stock.getDate());
-        if (repository.existsByTickerAndDate(stock.getTicker(), stock.getDate()))
+        Date date_now = new Date();
+        Date truncatedDate = DateUtils.truncate(new Date(), Calendar.DATE);
+        mappedValue.setDate(truncatedDate);
+        if (repository.existsByTickerAndDate(stock.getTicker(), truncatedDate))
         {
             repository.updateViews(mappedValue.getTicker(), mappedValue.getDate());
         }
