@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api")
 public class StockController {
 
@@ -44,27 +45,27 @@ public class StockController {
     // Endpoints for getting the list of open, high, low, close, adjusted close,
     // volume, dividend amount, and split coefficient values for a given ticker and date range
     @GetMapping("/stocks/open/{ticker}")
-    public List<BigDecimal> getOpenValues(@PathVariable String ticker, @RequestParam("start") Date startDate, @RequestParam("end") Date endDate) {
+    public List<Double> getOpenValues(@PathVariable String ticker, @RequestParam("start") Date startDate, @RequestParam("end") Date endDate) {
         return stockService.getOpenValues(ticker, startDate, endDate);
     }
 
     @GetMapping("/stocks/high/{ticker}")
-    public List<BigDecimal> getHighValues(@PathVariable String ticker, @RequestParam("start") Date startDate, @RequestParam("end") Date endDate) {
+    public List<Double> getHighValues(@PathVariable String ticker, @RequestParam("start") Date startDate, @RequestParam("end") Date endDate) {
         return stockService.getHighValues(ticker, startDate, endDate);
     }
 
     @GetMapping("/stocks/low/{ticker}")
-    public List<BigDecimal> getLowValues(@PathVariable String ticker, @RequestParam("start") Date startDate, @RequestParam("end") Date endDate) {
+    public List<Double> getLowValues(@PathVariable String ticker, @RequestParam("start") Date startDate, @RequestParam("end") Date endDate) {
         return stockService.getLowValues(ticker, startDate, endDate);
     }
 
     @GetMapping("/stocks/close/{ticker}")
-    public List<BigDecimal> getCloseValues(@PathVariable String ticker, @RequestParam("start") Date startDate, @RequestParam("end") Date endDate) {
+    public List<Double> getCloseValues(@PathVariable String ticker, @RequestParam("start") Date startDate, @RequestParam("end") Date endDate) {
         return stockService.getCloseValues(ticker, startDate, endDate);
     }
 
     @GetMapping("/stocks/adjusted-close/{ticker}")
-    public List<BigDecimal> getAdjustedCloseValues(@PathVariable String ticker, @RequestParam("start") Date startDate, @RequestParam("end") Date endDate) {
+    public List<Double> getAdjustedCloseValues(@PathVariable String ticker, @RequestParam("start") Date startDate, @RequestParam("end") Date endDate) {
         return stockService.getAdjustedCloseValues(ticker, startDate, endDate);
     }
 
@@ -73,7 +74,7 @@ public class StockController {
         return stockService.getVolumeValues(ticker, startDate, endDate);
     }
     @GetMapping("/stocks/dividend-amount/{ticker}")
-    public List<BigDecimal> getDividendAmountValues(@PathVariable String ticker, @RequestParam("start") Date startDate, @RequestParam("end") Date endDate) {
+    public List<Double> getDividendAmountValues(@PathVariable String ticker, @RequestParam("start") Date startDate, @RequestParam("end") Date endDate) {
         return stockService.getDividendAmountValues(ticker, startDate, endDate);
     }
 
@@ -113,8 +114,25 @@ public class StockController {
         }
     }
 
+
     @PostMapping("/stocks/add-stock")
     public String AddStockByTickerAndDate(@RequestParam("ticker") String ticker, @RequestParam("date") String date) throws ParseException {
         return stockService.saveStock(stockService.parseJsonToStock(ticker, new SimpleDateFormat("yyyy-mm-dd").parse(date)));
     }
+
+    @GetMapping("/stocks/stocksDailyEvolution")
+    public Map<String, Double> getEvolutions(@RequestParam("end") String end_date) throws ParseException
+    {
+        return stockService.getEvolutionsByClosePrice(new SimpleDateFormat("yyyy-mm-dd").parse(end_date));
+    }
+
+    @GetMapping("/stocks/stocksMostMoving")
+    public Map<String, Double> getMostMoving(@RequestParam("end") String end_date) throws ParseException
+    {
+        return stockService.getEvolutionsByClosePrice(new SimpleDateFormat("yyyy-mm-dd").parse(end_date));
+    }
+
+
+
+
 }

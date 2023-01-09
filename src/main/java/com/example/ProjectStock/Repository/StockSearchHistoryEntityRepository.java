@@ -16,7 +16,8 @@ public interface StockSearchHistoryEntityRepository extends JpaRepository<StockS
 
     List<StockSearchHistory> findAll();
     Optional<StockSearchHistory> findById(Long id);
-
+    @Query("SELECT DISTINCT h.ticker FROM StockSearchHistory h")
+    List<String> findDistinctTicker();
     List<StockSearchHistory> findByTicker(String ticker);
 
     List<StockSearchHistory> findByDate(Date date);
