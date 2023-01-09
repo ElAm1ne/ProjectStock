@@ -81,5 +81,7 @@ public class StockSearchHistoryService {
         return repository.findTopViewsByTicker(startDate, endDate);
     }
 
+
+
 }
 

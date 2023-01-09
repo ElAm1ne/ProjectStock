@@ -1,0 +1,20 @@
+<p>Stock Search History Table </p>
+<table class = "table table-striped">
+    <thead>
+        <tr>
+            <th> ticker </th>
+            <th> views </th>
+            <th> date </th>
+        </tr>
+    </thead>
+
+
+<tbody>
+     <tr *ngFor = "let a of StockSearchHistories" >
+         <td> {{a.ticker}} </td>
+         <td> {{a.views}} </td>
+         <td> {{a.date}} </td>
+     </tr>
+    
+</tbody>
+</table>

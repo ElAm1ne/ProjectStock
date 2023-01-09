@@ -1,4 +1,5 @@
 package com.example.ProjectStock.Repository;
+import com.example.ProjectStock.Modele.Stock;
 import com.example.ProjectStock.Modele.StockSearchHistory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -24,6 +25,9 @@ public interface StockSearchHistoryEntityRepository extends JpaRepository<StockS
     List<StockSearchHistory> findByViews(Long views);
 
     Optional<StockSearchHistory> findByTickerAndDate(String ticker, Date date);
+
+
+
     @Modifying
     @Transactional
     @Query("UPDATE StockSearchHistory s SET s.views = s.views + 1 WHERE s.date = ?2 and s.ticker = ?1")
@@ -41,6 +45,11 @@ public interface StockSearchHistoryEntityRepository extends JpaRepository<StockS
 
     @Query("SELECT e.ticker, SUM(e.views) as totalViews FROM StockSearchHistory e WHERE e.date BETWEEN :startDate AND :endDate GROUP BY e.ticker ORDER BY totalViews DESC")
     List<Object[]> findTopViewsByTicker(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+
+    @Query(value = "SELECT *  FROM stock_search_history WHERE views = (SELECT MAX(views) FROM stock_search_history) AND date >= DATEADD(DD, -5, cast(GETDATE() as date))", nativeQuery = true)
+    StockSearchHistory findMostSearchedStock();
+
+
 
 
 }

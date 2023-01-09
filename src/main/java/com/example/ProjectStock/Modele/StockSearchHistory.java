@@ -21,6 +21,6 @@ public class StockSearchHistory {
 
     @Column(name = "date")
     private Date date;
-    @Column(name = "views")
+    @Column(name = "views") 
     private Long views;
 }
