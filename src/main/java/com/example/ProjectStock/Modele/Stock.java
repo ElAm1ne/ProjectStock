@@ -23,26 +23,26 @@ public class Stock {
     private Date date;
     @JsonProperty("1. open")
     @Column(name = "open")
-    private BigDecimal open;
+    private Double open;
     @JsonProperty("2. high")
     @Column(name = "high")
-    private BigDecimal high;
+    private Double high;
     @JsonProperty("3. low")
     @Column(name = "low")
-    private BigDecimal low;
+    private Double low;
     @JsonProperty("4. close")
     @Column(name = "close")
-    private BigDecimal close;
+    private Double close;
     @JsonProperty("5. adjusted close")
     @Column(name = "adjusted_close")
-    private BigDecimal adjustedClose;
+    private Double adjustedClose;
     @JsonProperty("6. volume")
     @Column(name = "volume")
     private long volume;
     @JsonProperty("7. dividend amount")
     @Column(name = "dividend_amount")
-    private BigDecimal dividendAmount;
+    private Double dividendAmount;
     @JsonProperty("8. split coefficient")
     @Column(name = "split_coefficient")
-    private double splitCoefficient;
+    private Double splitCoefficient;
 }
