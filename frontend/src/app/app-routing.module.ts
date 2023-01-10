@@ -4,7 +4,7 @@ import { StocksearchResearchComponent } from './stocksearch-research/stocksearch
 
 const routes: Routes = [
   {path: 'StockSearchHistories', component: StocksearchResearchComponent},
-  {path: ', redirectTo: "StockSearchHistories', pathMatch: 'full'}
+  {path: '', redirectTo: "StockSearchHistories", pathMatch: 'full'}
 ];
 
 @NgModule({

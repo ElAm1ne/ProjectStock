@@ -1,0 +1,14 @@
+<h3> Chercher un stock </h3>
+<form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label> Stock </label>
+        <input type ="text" class="form-control" id ="stock" [(ngModel)] = "stockSearchHistory.ticker" name ="stock">
+    </div>
+
+    <div class="form-group">
+        <label> Selectionne une date </label>
+        <input type ="date" class="form-control" id ="date" [(ngModel)] = "stockSearchHistory.date" name ="date">
+    </div>
+
+    <button class = "btn btn-success" type="submit"> </button>
+</form> 
