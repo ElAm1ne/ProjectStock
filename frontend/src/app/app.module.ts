@@ -17,6 +17,7 @@ import {MatButtonModule} from '@angular/material/button'
 import {MatFormFieldModule} from '@angular/material/form-field'
 import {MatInputModule} from '@angular/material/input'
 import { MatNativeDateModule } from '@angular/material/core';
+import { StockSearchBetweenDateComponent } from './stock-search-between-date/stock-search-between-date.component';
 
 
 
@@ -28,6 +29,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     CandlestickComponent,
     SearchComponent,
     DatePickerComponent,
+    StockSearchBetweenDateComponent,
   ],
   imports: [
     BrowserModule,
