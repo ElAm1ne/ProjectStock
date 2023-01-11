@@ -121,19 +121,20 @@ public class StockService {
         HashMap<Date, Stock> stockMap = new HashMap<>();
         for (int i = 0; i <= daysBetween; i++){
             LocalDate i_date = date1.plusDays(i);
-            JSONObject jsonObj = new JSONObject(json).getJSONObject("Time Series (Daily)").getJSONObject(i_date.toString());
-            ObjectMapper mapper = new ObjectMapper();
-            Stock stock = null;
             try {
+                JSONObject jsonObj = new JSONObject(json).getJSONObject("Time Series (Daily)").getJSONObject(i_date.toString());
+                ObjectMapper mapper = new ObjectMapper();
+                Stock stock = null;
                 stock = mapper.readValue(jsonObj.toString(), Stock.class);
-            } catch (JsonProcessingException e) {
-                throw new RuntimeException(e);
-            }
-            Date truncatedDate_i = DateUtils.truncate(new SimpleDateFormat("yyyy-MM-dd").parse(date1.plusDays(i).toString()), Calendar.DATE);
-            stock.setDate(truncatedDate_i);
-            stock.setTicker(ticker);
+                Date truncatedDate_i = DateUtils.truncate(new SimpleDateFormat("yyyy-MM-dd").parse(date1.plusDays(i).toString()), Calendar.DATE);
+                stock.setDate(truncatedDate_i);
+                stock.setTicker(ticker);
 
-            stockMap.put(truncatedDate_i, stock);
+                stockMap.put(truncatedDate_i, stock);
+            } catch (Exception e) {
+                continue;
+            }
+
         }
 
         return stockMap;
