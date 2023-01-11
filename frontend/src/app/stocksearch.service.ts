@@ -8,9 +8,14 @@ import { StockSearchHistory } from './stock-search-history';
 })
 export class StocksearchService {
   private baseUrl = "http://localhost:9009/api/stock-history"; 
+  private researchUrl = "http://localhost:9009/api/stocks/stock";
   constructor(private httpClient: HttpClient) { }
   getStockSearchList() : Observable<StockSearchHistory[]>{
     return this.httpClient.get<StockSearchHistory[]>(`${this.baseUrl}`)
   }
-}
+
+  getStockByDate(ticker: string, date: string): Observable<Object> {
+    return this.httpClient.get<Object>(`${this.researchUrl}/${ticker}/${date}`);
+  }
+} 
  
