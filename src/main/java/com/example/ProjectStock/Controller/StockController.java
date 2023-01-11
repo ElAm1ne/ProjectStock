@@ -87,7 +87,7 @@ public class StockController {
     public Stock getStockByTickerAndDate(@RequestParam("ticker") String ticker, @RequestParam("date") String date) throws ParseException {
         try
         {
-            Stock stock = stockService.parseJsonToStock(ticker, new SimpleDateFormat("yyyy-mm-dd").parse(date));
+            Stock stock = stockService.parseJsonToStock(ticker, new SimpleDateFormat("yyyy-MM-dd").parse(date));
             stockHistoryService.saveHistory(stock);
             return stock;
         }
@@ -102,7 +102,7 @@ public class StockController {
     public HashMap<Date, Stock> getStockHistoryByTickerAndDate(@RequestParam("ticker") String ticker, @RequestParam("start") String start_date, @RequestParam("end") String end_date) throws ParseException {
         try
         {
-            HashMap<Date, Stock> stock_map = stockService.parseJsonToStockBetweenDates(ticker, new SimpleDateFormat("yyyy-mm-dd").parse(start_date), new SimpleDateFormat("yyyy-mm-dd").parse(end_date));
+            HashMap<Date, Stock> stock_map = stockService.parseJsonToStockBetweenDates(ticker, new SimpleDateFormat("yyyy-MM-dd").parse(start_date), new SimpleDateFormat("yyyy-MM-dd").parse(end_date));
             List<Stock> values_stock = new ArrayList<>(stock_map.values());
             stockHistoryService.saveHistory(values_stock.get(0));
             return stock_map;
@@ -117,19 +117,19 @@ public class StockController {
 
     @PostMapping("/stocks/add-stock")
     public String AddStockByTickerAndDate(@RequestParam("ticker") String ticker, @RequestParam("date") String date) throws ParseException {
-        return stockService.saveStock(stockService.parseJsonToStock(ticker, new SimpleDateFormat("yyyy-mm-dd").parse(date)));
+        return stockService.saveStock(stockService.parseJsonToStock(ticker, new SimpleDateFormat("yyyy-MM-dd").parse(date)));
     }
 
     @GetMapping("/stocks/stocksDailyEvolution")
     public Map<String, Double> getEvolutions(@RequestParam("end") String end_date) throws ParseException
     {
-        return stockService.getEvolutionsByClosePrice(new SimpleDateFormat("yyyy-mm-dd").parse(end_date));
+        return stockService.getEvolutionsByClosePrice(new SimpleDateFormat("yyyy-MM-dd").parse(end_date));
     }
 
     @GetMapping("/stocks/stocksMostMoving")
     public Map<String, Double> getMostMoving(@RequestParam("end") String end_date) throws ParseException
     {
-        return stockService.getEvolutionsByClosePrice(new SimpleDateFormat("yyyy-mm-dd").parse(end_date));
+        return stockService.getEvolutionsByClosePrice(new SimpleDateFormat("yyyy-MM-dd").parse(end_date));
     }
 
 
