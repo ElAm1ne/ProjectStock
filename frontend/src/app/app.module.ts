@@ -7,37 +7,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { StocksearchResearchComponent } from './stocksearch-research/stocksearch-research.component';
 import { CreateStockComponent } from './create-stock/create-stock.component';
 import { FormsModule } from '@angular/forms';
-import { CandlestickComponent } from './candlestick/candlestick.component';
-import { NgApexchartsModule } from "ng-apexcharts";
-import { SearchComponent } from './search/search.component';
-import { DatePickerComponent } from './date-picker/date-picker.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatDatepickerModule} from '@angular/material/datepicker'
-import {MatButtonModule} from '@angular/material/button'
-import {MatFormFieldModule} from '@angular/material/form-field'
-import {MatInputModule} from '@angular/material/input'
-import { MatNativeDateModule } from '@angular/material/core';
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
     StocksearchResearchComponent,
-    CreateStockComponent,
-    CandlestickComponent,
-    SearchComponent,
-    DatePickerComponent,
+    CreateStockComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule, 
     HttpClientModule,
-    FormsModule, NgApexchartsModule, BrowserAnimationsModule,MatDatepickerModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatNativeDateModule
+    FormsModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
