@@ -6,6 +6,9 @@ import { StockSearchHistory } from '../stock-search-history';
   styleUrls: ['./create-stock.component.css']
 })
 export class CreateStockComponent implements OnInit {
+onSubmit() {
+throw new Error('Method not implemented.');
+}
   stockSearchHistory: StockSearchHistory = new  StockSearchHistory()
   constructor() {}
   ngOnInit() : void {}

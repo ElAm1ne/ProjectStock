@@ -24,7 +24,7 @@ public class StockSearchHistoryController {
     }
     @GetMapping("/{ticker}/{date}")
     public Optional<StockSearchHistory> findByTickerAndDate(@PathVariable String ticker, @PathVariable String date) throws ParseException {
-        Date truncatedDate = DateUtils.truncate(new SimpleDateFormat("yyyy-mm-dd").parse(date), Calendar.DATE);
+        Date truncatedDate = DateUtils.truncate(new SimpleDateFormat("yyyy-MM-dd").parse(date), Calendar.DATE);
         return stockSearchHistoryService.findByTickerAndDate(ticker, truncatedDate);
     }
 
@@ -45,23 +45,23 @@ public class StockSearchHistoryController {
     }
     @GetMapping("/views/top")
     public List<Object[]> getTopViewsByTicker( @RequestParam("start") String start_date, @RequestParam("end") String end_date) throws ParseException{
-        return stockSearchHistoryService.getTopViewsByTicker(new SimpleDateFormat("yyyy-mm-dd").parse(start_date), new SimpleDateFormat("yyyy-mm-dd").parse(end_date));
+        return stockSearchHistoryService.getTopViewsByTicker(new SimpleDateFormat("yyyy-MM-dd").parse(start_date), new SimpleDateFormat("yyyy-MM-dd").parse(end_date));
     }
 
     @GetMapping("/views/topn")
     public List<Object[]> getTopnViewsByTicker( @RequestParam("start") String start_date, @RequestParam("end") String end_date, @RequestParam("n") int n) throws ParseException{
-        return stockSearchHistoryService.getTopViewsByTicker(new SimpleDateFormat("yyyy-mm-dd").parse(start_date), new SimpleDateFormat("yyyy-mm-dd").parse(end_date)).stream().limit(n).collect(Collectors.toList());
+        return stockSearchHistoryService.getTopViewsByTicker(new SimpleDateFormat("yyyy-MM-dd").parse(start_date), new SimpleDateFormat("yyyy-MM-dd").parse(end_date)).stream().limit(n).collect(Collectors.toList());
     }
 
     @GetMapping("/views/evolutions")
     public HashMap<String, Double> getEvolutionsOnSearches(@RequestParam("end") String end_date) throws ParseException{
-        return stockSearchHistoryService.getEvolutionSearches(new SimpleDateFormat("yyyy-mm-dd").parse(end_date));
+        return stockSearchHistoryService.getEvolutionSearches(new SimpleDateFormat("yyyy-MM-dd").parse(end_date));
     }
 
     @GetMapping("/views/stocksSearchRatios")
     public Map<String, Double> getSearchRatios(@RequestParam("end") String end_date) throws ParseException
     {
-        return stockSearchHistoryService.getRatioSearches(new SimpleDateFormat("yyyy-mm-dd").parse(end_date));
+        return stockSearchHistoryService.getRatioSearches(new SimpleDateFormat("yyyy-MM-dd").parse(end_date));
     }
 
 }
