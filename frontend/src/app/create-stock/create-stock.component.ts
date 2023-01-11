@@ -1,16 +1,29 @@
 import { Component ,OnInit } from '@angular/core';
 import { StockSearchHistory } from '../stock-search-history';
+import { StocksearchService } from '../stocksearch.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-create-stock',
   templateUrl: './create-stock.component.html',
   styleUrls: ['./create-stock.component.css']
 })
 export class CreateStockComponent implements OnInit {
-onSubmit() {
-throw new Error('Method not implemented.');
-}
-  stockSearchHistory: StockSearchHistory = new  StockSearchHistory()
-  constructor() {}
+  
   ngOnInit() : void {}
+  date: string;
+  ticker: string;
+  data: any;
+
+  constructor(private http: HttpClient) {}
+
+
+
+  onSubmit() {
+    this.http.get(`http://localhost:9009/api/stocks/stock?ticker=${this.ticker}&date=${this.date}`)
+      .subscribe(data => {
+        this.data = data;
+      });
+  }
 
 }
