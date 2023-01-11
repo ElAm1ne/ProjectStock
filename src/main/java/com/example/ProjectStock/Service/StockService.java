@@ -92,18 +92,19 @@ public class StockService {
         url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=<ticker>&apikey=1XDCVS7DM3C1XE20".replace("<ticker>", ticker);
 
         String json = restTemplate.getForObject(url, String.class);
-        JSONObject jsonObj = new JSONObject(json).getJSONObject("Time Series (Daily)").getJSONObject(new SimpleDateFormat("yyyy-mm-dd").format(date));
+        JSONObject jsonObj = new JSONObject(json).getJSONObject("Time Series (Daily)").getJSONObject(new SimpleDateFormat("yyyy-MM-dd").format(date));
         ObjectMapper mapper = new ObjectMapper();
         Stock stock = null;
         try {
             stock = mapper.readValue(jsonObj.toString(), Stock.class);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            LocalDate date1 = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            Date truncatedDate_i = DateUtils.truncate(new SimpleDateFormat("yyyy-MM-dd").parse(date1.toString()), Calendar.DATE);
+            stock.setDate(truncatedDate_i);
+            stock.setTicker(ticker);
+        } catch (Exception e) {
+
         }
-        LocalDate date1 = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        Date truncatedDate_i = DateUtils.truncate(new SimpleDateFormat("yyyy-mm-dd").parse(date1.toString()), Calendar.DATE);
-        stock.setDate(truncatedDate_i);
-        stock.setTicker(ticker);
+
 
 
         return stock;
@@ -112,7 +113,7 @@ public class StockService {
     public HashMap<Date, Stock> parseJsonToStockBetweenDates(String ticker, Date start_date, Date end_date) throws ParseException {
 
         String url;
-        url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=<ticker>&apikey=1XDCVS7DM3C1XE20".replace("<ticker>", ticker);
+        url =    "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=<ticker>&apikey=1XDCVS7DM3C1XE20".replace("<ticker>", ticker);
 
         String json = restTemplate.getForObject(url, String.class);
         LocalDate date1 = start_date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -121,19 +122,20 @@ public class StockService {
         HashMap<Date, Stock> stockMap = new HashMap<>();
         for (int i = 0; i <= daysBetween; i++){
             LocalDate i_date = date1.plusDays(i);
-            JSONObject jsonObj = new JSONObject(json).getJSONObject("Time Series (Daily)").getJSONObject(i_date.toString());
-            ObjectMapper mapper = new ObjectMapper();
-            Stock stock = null;
             try {
+                JSONObject jsonObj = new JSONObject(json).getJSONObject("Time Series (Daily)").getJSONObject(i_date.toString());
+                ObjectMapper mapper = new ObjectMapper();
+                Stock stock = null;
                 stock = mapper.readValue(jsonObj.toString(), Stock.class);
-            } catch (JsonProcessingException e) {
-                throw new RuntimeException(e);
-            }
-            Date truncatedDate_i = DateUtils.truncate(new SimpleDateFormat("yyyy-MM-dd").parse(date1.plusDays(i).toString()), Calendar.DATE);
-            stock.setDate(truncatedDate_i);
-            stock.setTicker(ticker);
+                Date truncatedDate_i = DateUtils.truncate(new SimpleDateFormat("yyyy-MM-dd").parse(date1.plusDays(i).toString()), Calendar.DATE);
+                stock.setDate(truncatedDate_i);
+                stock.setTicker(ticker);
 
-            stockMap.put(truncatedDate_i, stock);
+                stockMap.put(truncatedDate_i, stock);
+            } catch (Exception e) {
+                continue;
+            }
+
         }
 
         return stockMap;
