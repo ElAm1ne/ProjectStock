@@ -1,4 +1,4 @@
-import { Component, VERSION ,ViewChild,OnInit } from '@angular/core';
+import { Component, VERSION ,ViewChild,OnInit, Input } from '@angular/core';
 
 import {ChartComponent,ApexAxisChartSeries,ApexChart,ApexYAxis,ApexXAxis,ApexTitleSubtitle} from "ng-apexcharts";
 import { HttpClient } from '@angular/common/http';
@@ -17,16 +17,20 @@ export type ChartOptions = {
   styleUrls: ['./candlestick.component.css']
 })
 export class CandlestickComponent implements OnInit {
-  ngOnInit(){
-
-    
-  }
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions> | any;
   csdata : any = [];
+  @Input() ticker: string;
+  @Input() start: string;
+  @Input() end: string;
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) {
-    this.http.get('http://localhost:9009/api/stocks/stockBetween?ticker=AAPL&start=2022-11-10&end=2022-12-28').subscribe((stockData : any) => {
+  ngOnInit(){
+    this.csdata = [];
+    console.log(this.ticker);
+    console.log(this.start);
+    console.log(this.end);
+    this.http.get(`http://localhost:9009/api/stocks/stockBetween?ticker=${this.ticker}&start=${this.start}&end=${this.end}`).subscribe((stockData : any) => {
       for (const date in stockData) {
         if (stockData.hasOwnProperty(date)) {
           const { '1. open': open, '2. high': high, '3. low': low, '4. close': close } = stockData[date];
@@ -62,9 +66,8 @@ export class CandlestickComponent implements OnInit {
         }
       }
     };
-}
+    
 
-
-
+  }
 
 }

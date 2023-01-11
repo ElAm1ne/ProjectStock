@@ -1,7 +1,7 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
+import { CandlestickComponent } from '../candlestick/candlestick.component';
 @Component({
   selector: 'app-stock-search-between-date',
   templateUrl: './stock-search-between-date.component.html',
@@ -11,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
 export class StockSearchBetweenDateComponent implements OnInit{
 
 
-
+  @ViewChild(CandlestickComponent) child : any;
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {}
@@ -28,6 +28,8 @@ export class StockSearchBetweenDateComponent implements OnInit{
     this.http.get(url).subscribe(data => {
       this.data = Object.values(data);
     });
+    this.child.ngOnInit();
+    setTimeout(() => window.dispatchEvent(new Event('resize')), 2000);
   }
 }
 
