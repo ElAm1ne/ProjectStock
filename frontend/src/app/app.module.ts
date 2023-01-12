@@ -18,6 +18,7 @@ import {MatFormFieldModule} from '@angular/material/form-field'
 import {MatInputModule} from '@angular/material/input'
 import { MatNativeDateModule } from '@angular/material/core';
 import { StockSearchBetweenDateComponent } from './stock-search-between-date/stock-search-between-date.component';
+import { TreemapComponent } from './treemap/treemap.component';
 
 
 
@@ -30,6 +31,7 @@ import { StockSearchBetweenDateComponent } from './stock-search-between-date/sto
     SearchComponent,
     DatePickerComponent,
     StockSearchBetweenDateComponent,
+    TreemapComponent,
   ],
   imports: [
     BrowserModule,

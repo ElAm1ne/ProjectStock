@@ -27,9 +27,6 @@ export class CandlestickComponent implements OnInit {
 
   ngOnInit(){
     this.csdata = [];
-    console.log(this.ticker);
-    console.log(this.start);
-    console.log(this.end);
     this.http.get(`http://localhost:9009/api/stocks/stockBetween?ticker=${this.ticker}&start=${this.start}&end=${this.end}`).subscribe((stockData : any) => {
       for (const date in stockData) {
         if (stockData.hasOwnProperty(date)) {
