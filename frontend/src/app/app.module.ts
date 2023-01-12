@@ -19,6 +19,7 @@ import {MatInputModule} from '@angular/material/input'
 import { MatNativeDateModule } from '@angular/material/core';
 import { StockSearchBetweenDateComponent } from './stock-search-between-date/stock-search-between-date.component';
 import { AuditStockComponent } from './audit-stock/audit-stock.component';
+import { HomeComponent } from './home/home.component';
 
 
 
@@ -32,6 +33,7 @@ import { AuditStockComponent } from './audit-stock/audit-stock.component';
     DatePickerComponent,
     StockSearchBetweenDateComponent,
     AuditStockComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

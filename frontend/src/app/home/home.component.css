@@ -1,0 +1,17 @@
+
+  .banner {
+      /* The image used */
+      background-image:
+      /*linear gradient overlay*/
+      linear-gradient(to top right, rgba(13,110,253, 0.30) 10%, rgba(0,0,0, 0.20 ) 60%),
+      /* Create the parallax scrolling effect */
+      background-attachment: fixed;
+      /* Prevent image from repeating */
+      background-repeat: no-repeat;
+      /* Set height */
+      height: auto;
+      /* Set background size */
+      background-size:cover;
+      /* Set background position */
+      background-position:right center
+    }

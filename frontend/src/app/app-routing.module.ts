@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuditStockComponent } from './audit-stock/audit-stock.component';
 import { CreateStockComponent } from './create-stock/create-stock.component';
+import { HomeComponent } from './home/home.component';
 import { StockSearchBetweenDateComponent } from './stock-search-between-date/stock-search-between-date.component';
 import { StocksearchResearchComponent } from './stocksearch-research/stocksearch-research.component';
 
@@ -12,6 +13,8 @@ const routes: Routes = [
   
   {path: 'stockBetweenDate', component: StockSearchBetweenDateComponent},
   {path: 'auditStock', component: AuditStockComponent},
+  {path: 'home', component: HomeComponent},
+  {path: '', redirectTo: "home", pathMatch: 'full'}, 
 ];
 
 @NgModule({
