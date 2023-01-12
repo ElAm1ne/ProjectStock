@@ -1,5 +1,4 @@
-import { Component, VERSION ,ViewChild,OnInit } from '@angular/core';
-
+import { Component, VERSION ,ViewChild,OnInit, Input } from '@angular/core';
 import {ChartComponent,ApexAxisChartSeries,ApexChart,ApexYAxis,ApexXAxis,ApexTitleSubtitle} from "ng-apexcharts";
 import { HttpClient } from '@angular/common/http';
 import * as moment from 'moment';
@@ -17,10 +16,11 @@ export type ChartOptions = {
   styleUrls: ['./candlestick.component.css']
 })
 export class CandlestickComponent implements OnInit {
+
   ngOnInit(){
 
-    
   }
+
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions> | any;
   csdata : any = [];

@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output,EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class StockSearchBetweenDateComponent implements OnInit{
 
+ 
 
 
   constructor(private http: HttpClient) {}
@@ -19,9 +20,7 @@ export class StockSearchBetweenDateComponent implements OnInit{
   end: string;
   ticker: string;
   data: any[];
-
-
-
+  
 
   onSubmit() {
     const url = `http://localhost:9009/api/stocks/stockBetween?ticker=${this.ticker}&start=${this.start}&end=${this.end}`;

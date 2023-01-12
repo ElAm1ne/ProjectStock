@@ -4,6 +4,7 @@
       background-image:
       /*linear gradient overlay*/
       linear-gradient(to top right, rgba(13,110,253, 0.30) 10%, rgba(0,0,0, 0.20 ) 60%),
+      url("mountains.jpg");
       /* Create the parallax scrolling effect */
       background-attachment: fixed;
       /* Prevent image from repeating */
@@ -30,10 +31,10 @@
             <a class="nav-link active" aria-current="page" href="/#services">Services</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
+            <a class="nav-link" href="/auditStock" > Get Stock Research History </a>
           </li>
            <li class="nav-item">
-            <a class="nav-link" href="/stockSearchHistory" routerLink="stockSearchHistory" routerLinkActive ="active" > Pricing</a>
+            <a class="nav-link" href="/stockSearchHistory" routerLink="stockSearchHistory" routerLinkActive ="active" > Get Stock Prices </a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -63,32 +64,11 @@
       <h1 class="display-4"> View the price of any stock.</h1>
       <h5>Ask us any stock at any date ! We will provide all information </h5>
       <br>
-      <a class="btn btn-primary btn-lg" role="button"  href="/stockSearchHistory" routerLink="stockSearchHistory" routerLinkActive ="active">Click here, so you can try  </a>
+      <a class="btn btn-primary btn-lg" role="button"  href="/stockSearchHistory" routerLink="/stockSearchHistory" routerLinkActive ="active">Click here, so you can try  </a>
       <br><br><br><br><br><br>
     </div>
   </div>
+<app-audit-stock></app-audit-stock>
 
 
 
-
-<nav class = "navbar navbar-expand-sm bg-primary navbar-dark">
-  <ul class = "navbar-nav">
-      <li class = "nav-item">
-          <a routerLink="StockSearchHistories" routerLinkActive ="active" class="nav-link"> StockSearchHistoriesList </a>
-          <a routerLink="stockSearch" routerLinkActive ="active" class="nav-link"> Rechercher des stocks </a>
-          <a routerLink="stockBetweenDate" routerLinkActive ="active" class="nav-link"> Trouver les stocks entre deux dates </a>
-      </li>
-  </ul>
-</nav>
-<div class="container">
-  <router-outlet> </router-outlet>
-</div>
-<div class = "container">
-  <app-date-picker></app-date-picker>
-</div>
-<div class = "container">
-  <app-candlestick></app-candlestick>
-</div>
-<div class = "container">
-  <app-stock-search-between-date></app-stock-search-between-date>
-</div>
