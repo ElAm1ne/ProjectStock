@@ -4,7 +4,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { CandlestickComponent } from '../candlestick/candlestick.component';
-
 import { TreemapComponent } from '../treemap/treemap.component';
 import { OrderPipe } from 'ngx-order-pipe';
 @Component({

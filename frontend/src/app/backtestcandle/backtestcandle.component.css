@@ -43,3 +43,7 @@ form {
     padding: 5px;
   }
 
+  #chart {
+    max-width: 600px;
+    margin: 30px auto;
+  }

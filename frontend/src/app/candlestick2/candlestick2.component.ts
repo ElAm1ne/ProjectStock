@@ -27,7 +27,8 @@ export class Candlestick2Component implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.cpdata = []
+    console.log(this.amount);
+    this.cpdata = [];
     const url = `http://localhost:9009/api/stocks/backtest?valptf=${this.amount}&tickers=${this.tickers}&percentages=${this.percentages}&start=${this.start}&end=${this.end}`;
     let res = this.http.get(url);
     res.subscribe((stockData : any) => {
