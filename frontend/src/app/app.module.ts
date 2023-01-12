@@ -25,6 +25,7 @@ import { BacktestComponent } from './backtest/backtest.component';
 import { KeyValuePipe } from '@angular/common';
 import { OrderPipe } from 'ngx-order-pipe';
 import { OrderModule } from 'ngx-order-pipe';
+import { Candlestick2Component } from './candlestick2/candlestick2.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { OrderModule } from 'ngx-order-pipe';
     HomeComponent,
     TreemapComponent,
     BacktestComponent,
+    Candlestick2Component,
   ],
   imports: [
     BrowserModule,

@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 
-import { CandlestickComponent } from '../candlestick/candlestick.component';
+import { Candlestick2Component } from '../candlestick2/candlestick2.component';
 import { OrderPipe } from 'ngx-order-pipe';
 @Component({
   selector: 'app-backtest',
@@ -13,7 +13,7 @@ import { OrderPipe } from 'ngx-order-pipe';
 export class BacktestComponent implements OnInit {
   order: string = 'date'; 
 
-  @ViewChild(CandlestickComponent) child : any;
+  @ViewChild(Candlestick2Component) child : any;
 
   constructor(private http: HttpClient) {}
 
@@ -25,13 +25,9 @@ export class BacktestComponent implements OnInit {
 
   end: string;
 
-  ticker: string;
-
   tickers: string;
 
   percentages: string;
-
-  which: string;
 
   data: any[];
 
@@ -41,21 +37,15 @@ export class BacktestComponent implements OnInit {
   onSubmit() {
 
     const url = `http://localhost:9009/api/stocks/backtest?valptf=${this.amount}&tickers=${this.tickers}&percentages=${this.percentages}&start=${this.start}&end=${this.end}`;
-
     this.http.get(url).subscribe(data => {
 
       this.data = Object.values(data);
 
     });
-    this.child.which = url;
-    this.child.amount = this.amount;
-    this.child.tickers = this.tickers;
-    this.child.percentages = this.percentages;
-    this.child.start = this.start;
-    this.child.end = this.end;
+
     this.child.ngOnInit();
 
-    setTimeout(() => window.dispatchEvent(new Event('resize')), 2000);
+    setTimeout(() => window.dispatchEvent(new Event('resize')), 4000);
 
   }
 
