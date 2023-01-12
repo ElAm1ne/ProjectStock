@@ -13,7 +13,6 @@ export class StockSearchBetweenDateComponent implements OnInit{
 
 
   @ViewChild(CandlestickComponent) child : any;
-  @ViewChild(TreemapComponent) child2 : any;
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {}
@@ -31,7 +30,7 @@ export class StockSearchBetweenDateComponent implements OnInit{
       this.data = Object.values(data);
     });
     this.child.ngOnInit();
-    this.child2.ngOnInit();
+
     setTimeout(() => window.dispatchEvent(new Event('resize')), 2000);
   }
 }

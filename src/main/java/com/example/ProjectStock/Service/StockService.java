@@ -140,8 +140,62 @@ public class StockService {
 
         return stockMap;
     }
+    public Stock multiplyByPercentage(Stock stock, Double percentage) {
+        Stock newStock = new Stock();
+        newStock.setTicker(stock.getTicker());
+        newStock.setId(99L);
+        newStock.setDate(stock.getDate());
+        newStock.setOpen(stock.getOpen() * percentage);
+        newStock.setHigh(stock.getHigh() * percentage);
+        newStock.setLow(stock.getLow() * percentage);
+        newStock.setClose(stock.getClose() * percentage);
+        newStock.setAdjustedClose(stock.getAdjustedClose() * percentage);
+        newStock.setVolume(stock.getVolume());
+        newStock.setDividendAmount(stock.getDividendAmount() * percentage);
+        newStock.setSplitCoefficient(stock.getSplitCoefficient() * percentage);
+        return newStock;
+    }
+
+    public Stock AddTwoStocks(Stock stock1, Stock stock2) {
+        Stock newStock = new Stock();
+        newStock.setTicker(stock1.getTicker());
+        newStock.setId(99L);
+        newStock.setDate(stock1.getDate());
+        newStock.setOpen(stock1.getOpen()+ stock2.getOpen());
+        newStock.setHigh(stock1.getHigh() + stock2.getHigh());
+        newStock.setLow(stock1.getLow() + stock2.getLow());
+        newStock.setClose(stock1.getClose() + stock2.getClose());
+        newStock.setAdjustedClose(stock1.getAdjustedClose() + stock2.getAdjustedClose());
+        newStock.setVolume(stock1.getVolume() + stock2.getVolume());
+        newStock.setDividendAmount(stock1.getDividendAmount() + stock2.getDividendAmount());
+        newStock.setSplitCoefficient(stock1.getSplitCoefficient() + stock2.getSplitCoefficient());
+        return newStock;
+    }
+    public HashMap<Date, Stock> Backtest(String ticker, String percent, Date start_date, Date end_date) throws ParseException {
+
+        String url;
+        List<String> TickersList = Arrays.asList(ticker.split(","));
+        List<Double> PercentagesList = Arrays.asList(percent.split(",")).stream().mapToDouble(Double::parseDouble).boxed().collect(Collectors.toList());
+        List<String> Jsons = new ArrayList<>();
+        List<HashMap<Date, Stock>> StocksHashList = new ArrayList<>();
+        for (int i = 0; i < TickersList.size(); i++){
+            url =    "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=<ticker>&apikey=1XDCVS7DM3C1XE20".replace("<ticker>", TickersList.get(i));
+            StocksHashList.add(parseJsonToStockBetweenDates(TickersList.get(i), start_date, end_date));
+        }
+        HashMap<Date, Stock> Portfolio = new HashMap<>();
+        for (Date key: StocksHashList.get(0).keySet()){
+            Stock newStockAtDate = new Stock();
+            for (int i = 0; i < TickersList.size(); i++){
+                newStockAtDate = AddTwoStocks(newStockAtDate, multiplyByPercentage(StocksHashList.get(i).get(key), PercentagesList.get(i)));
+            }
+            newStockAtDate.setTicker("Portfolio");
+            Portfolio.put(key, newStockAtDate);
+        }
 
 
+
+        return Portfolio;
+    }
     public HashMap<String, Double> getEvolutionsByClosePrice(Date end_date) throws ParseException
     {
         List<String> Tickers_in_db = new ArrayList<>();
