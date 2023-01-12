@@ -1,7 +1,8 @@
 
-import { Component, OnInit, Output,EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
+import { CandlestickComponent } from '../candlestick/candlestick.component';
+import { TreemapComponent } from '../treemap/treemap.component';
 @Component({
   selector: 'app-stock-search-between-date',
   templateUrl: './stock-search-between-date.component.html',
@@ -10,9 +11,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class StockSearchBetweenDateComponent implements OnInit{
 
- 
 
-
+  @ViewChild(CandlestickComponent) child : any;
+  @ViewChild(TreemapComponent) child2 : any;
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {}
@@ -20,13 +21,18 @@ export class StockSearchBetweenDateComponent implements OnInit{
   end: string;
   ticker: string;
   data: any[];
-  
+
+
+
 
   onSubmit() {
     const url = `http://localhost:9009/api/stocks/stockBetween?ticker=${this.ticker}&start=${this.start}&end=${this.end}`;
     this.http.get(url).subscribe(data => {
       this.data = Object.values(data);
     });
+    this.child.ngOnInit();
+    this.child2.ngOnInit();
+    setTimeout(() => window.dispatchEvent(new Event('resize')), 2000);
   }
 }
 

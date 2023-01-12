@@ -5,11 +5,11 @@
         <input type="text" id="ticker" [(ngModel)]="ticker" name="ticker">
         </div>
     <div class="form-group">
-    <label for="start">Date:</label>
+    <label for="start">Start date:</label>
     <input  type="date" id="start" [(ngModel)]="start" name="start">
     </div>
     <div class="form-group">
-        <label for="end">Date:</label>
+        <label for="end">End date:</label>
         <input  type="date" id="end" [(ngModel)]="end" name="end">
         </div>
     <button type="submit">Submit</button>
@@ -43,7 +43,11 @@
       </tr>
     </tbody>
   </table>
-
-
+  <div class = "container">
+    <app-candlestick [ticker]="ticker" [start]="start" [end]="end"></app-candlestick>
+  </div>
+  <div class = "container">
+    <app-treemap [start]="start" [end]="end"></app-treemap>
+  </div>
 
 
