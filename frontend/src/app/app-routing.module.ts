@@ -5,9 +5,10 @@ import { CreateStockComponent } from './create-stock/create-stock.component';
 import { HomeComponent } from './home/home.component';
 import { StockSearchBetweenDateComponent } from './stock-search-between-date/stock-search-between-date.component';
 import { StocksearchResearchComponent } from './stocksearch-research/stocksearch-research.component';
-
+import { BacktestComponent } from './backtest/backtest.component';
 const routes: Routes = [
   {path: 'StockSearchHistories', component: StocksearchResearchComponent},
+  {path: 'BackTest', component: BacktestComponent},
  // {path: '', redirectTo: "StockSearchHistories", pathMatch: 'full'}, 
   {path: 'stockSearchHistory', component: CreateStockComponent},
   

@@ -21,7 +21,10 @@ import { StockSearchBetweenDateComponent } from './stock-search-between-date/sto
 import { AuditStockComponent } from './audit-stock/audit-stock.component';
 import { HomeComponent } from './home/home.component';
 import { TreemapComponent } from './treemap/treemap.component';
-
+import { BacktestComponent } from './backtest/backtest.component';
+import { KeyValuePipe } from '@angular/common';
+import { OrderPipe } from 'ngx-order-pipe';
+import { OrderModule } from 'ngx-order-pipe';
 
 
 @NgModule({
@@ -36,6 +39,7 @@ import { TreemapComponent } from './treemap/treemap.component';
     AuditStockComponent,
     HomeComponent,
     TreemapComponent,
+    BacktestComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,7 +49,8 @@ import { TreemapComponent } from './treemap/treemap.component';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    OrderModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -133,10 +133,10 @@ public class StockController {
     }
 
     @GetMapping("stocks/backtest")
-    public HashMap<Date, Stock> BackTestTickersBetween(@RequestParam("tickers") String tickers, @RequestParam("percentages") String percent, @RequestParam("start") String start, @RequestParam("end") String end) throws ParseException {
+    public HashMap<Date, Stock> BackTestTickersBetween(@RequestParam("valptf") String montant,@RequestParam("tickers") String tickers, @RequestParam("percentages") String percent, @RequestParam("start") String start, @RequestParam("end") String end) throws ParseException {
         try
         {
-            HashMap<Date, Stock> stock_map = stockService.Backtest(tickers, percent, new SimpleDateFormat("yyyy-MM-dd").parse(start), new SimpleDateFormat("yyyy-MM-dd").parse(end));
+            HashMap<Date, Stock> stock_map = stockService.Backtest(Double.valueOf(montant), tickers, percent, new SimpleDateFormat("yyyy-MM-dd").parse(start), new SimpleDateFormat("yyyy-MM-dd").parse(end));
             List<Stock> values_stock = new ArrayList<>(stock_map.values());
             stockHistoryService.saveHistory(values_stock.get(0));
             return stock_map;

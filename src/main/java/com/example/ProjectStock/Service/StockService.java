@@ -24,6 +24,8 @@ import java.util.stream.Collectors;
 import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import static java.util.Collections.min;
+
 
 @Service
 public class StockService {
@@ -140,19 +142,19 @@ public class StockService {
 
         return stockMap;
     }
-    public Stock multiplyByPercentage(Stock stock, Double percentage) {
+    public Stock multiplyByShares(Stock stock, Double shares) {
         Stock newStock = new Stock();
         newStock.setTicker(stock.getTicker());
         newStock.setId(99L);
         newStock.setDate(stock.getDate());
-        newStock.setOpen(stock.getOpen() * percentage);
-        newStock.setHigh(stock.getHigh() * percentage);
-        newStock.setLow(stock.getLow() * percentage);
-        newStock.setClose(stock.getClose() * percentage);
-        newStock.setAdjustedClose(stock.getAdjustedClose() * percentage);
+        newStock.setOpen(stock.getOpen() * shares);
+        newStock.setHigh(stock.getHigh() * shares);
+        newStock.setLow(stock.getLow() * shares);
+        newStock.setClose(stock.getClose() * shares);
+        newStock.setAdjustedClose(stock.getAdjustedClose() * shares);
         newStock.setVolume(stock.getVolume());
-        newStock.setDividendAmount(stock.getDividendAmount() * percentage);
-        newStock.setSplitCoefficient(stock.getSplitCoefficient() * percentage);
+        newStock.setDividendAmount(stock.getDividendAmount() * shares);
+        newStock.setSplitCoefficient(stock.getSplitCoefficient() * shares);
         return newStock;
     }
 
@@ -161,21 +163,23 @@ public class StockService {
         newStock.setTicker(stock1.getTicker());
         newStock.setId(99L);
         newStock.setDate(stock1.getDate());
-        newStock.setOpen(stock1.getOpen()+ stock2.getOpen());
-        newStock.setHigh(stock1.getHigh() + stock2.getHigh());
-        newStock.setLow(stock1.getLow() + stock2.getLow());
-        newStock.setClose(stock1.getClose() + stock2.getClose());
-        newStock.setAdjustedClose(stock1.getAdjustedClose() + stock2.getAdjustedClose());
-        newStock.setVolume(stock1.getVolume() + stock2.getVolume());
-        newStock.setDividendAmount(stock1.getDividendAmount() + stock2.getDividendAmount());
-        newStock.setSplitCoefficient(stock1.getSplitCoefficient() + stock2.getSplitCoefficient());
+        newStock.setOpen((double) (Math.round((stock1.getOpen()+ stock2.getOpen())*100)/100));
+        newStock.setHigh((double)Math.round((stock1.getHigh() + stock2.getHigh())*100)/100);
+        newStock.setLow((double) Math.round((stock1.getLow() + stock2.getLow())*100)/100);
+        newStock.setClose((double) Math.round((stock1.getClose() + stock2.getClose())*100)/100);
+        newStock.setAdjustedClose((double) Math.round((stock1.getAdjustedClose() + stock2.getAdjustedClose())*100)/100);
+        newStock.setVolume(Math.round((stock1.getVolume() + stock2.getVolume())*100)/100);
+        newStock.setDividendAmount((double) Math.round((stock1.getDividendAmount() + stock2.getDividendAmount())*100)/100);
+        newStock.setSplitCoefficient((double) Math.round((stock1.getSplitCoefficient() + stock2.getSplitCoefficient())*100)/100);
         return newStock;
     }
-    public HashMap<Date, Stock> Backtest(String ticker, String percent, Date start_date, Date end_date) throws ParseException {
+    public HashMap<Date, Stock> Backtest(Double montant, String ticker, String percent, Date start_date, Date end_date) throws ParseException {
 
         String url;
         List<String> TickersList = Arrays.asList(ticker.split(","));
         List<Double> PercentagesList = Arrays.asList(percent.split(",")).stream().mapToDouble(Double::parseDouble).boxed().collect(Collectors.toList());
+        List<Double> AmountInEach = PercentagesList.stream().map(d -> d*montant).collect(Collectors.toList());
+        List<Double> NumberOfShares = new ArrayList<>();
         List<String> Jsons = new ArrayList<>();
         List<HashMap<Date, Stock>> StocksHashList = new ArrayList<>();
         for (int i = 0; i < TickersList.size(); i++){
@@ -183,12 +187,19 @@ public class StockService {
             StocksHashList.add(parseJsonToStockBetweenDates(TickersList.get(i), start_date, end_date));
         }
         HashMap<Date, Stock> Portfolio = new HashMap<>();
+        Date minDate = min(StocksHashList.get(0).keySet());
+        Stock stock_Day_one = new Stock();
+        for (int i = 0; i < TickersList.size(); i++){
+            stock_Day_one = StocksHashList.get(i).get(minDate);
+            NumberOfShares.add(AmountInEach.get(i)/stock_Day_one.getClose());
+        }
         for (Date key: StocksHashList.get(0).keySet()){
             Stock newStockAtDate = new Stock();
             for (int i = 0; i < TickersList.size(); i++){
-                newStockAtDate = AddTwoStocks(newStockAtDate, multiplyByPercentage(StocksHashList.get(i).get(key), PercentagesList.get(i)));
+                newStockAtDate = AddTwoStocks(newStockAtDate, multiplyByShares(StocksHashList.get(i).get(key), NumberOfShares.get(i)));
             }
             newStockAtDate.setTicker("Portfolio");
+            newStockAtDate.setDate(key);
             Portfolio.put(key, newStockAtDate);
         }
 
@@ -231,7 +242,7 @@ public class StockService {
 
         HashMap<String, Double> Evolution_by_ticker = new HashMap<String, Double>();
         Evolution_by_ticker = getEvolutionsByClosePrice(end_date);
-        String Min_Ticker = Collections.min(Evolution_by_ticker.entrySet(), Map.Entry.comparingByValue()).getKey();
+        String Min_Ticker = min(Evolution_by_ticker.entrySet(), Map.Entry.comparingByValue()).getKey();
 
         Stock Max_Mover_Stock = parseJsonToStock(Min_Ticker, end_date);
         StockWithEvolution stockWithEvolution = new StockWithEvolution();

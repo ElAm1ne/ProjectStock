@@ -25,6 +25,7 @@
     "cors": "^2.8.5",
     "moment": "^2.29.4",
     "ng-apexcharts": "^1.5.1",
+    "ngx-order-pipe": "^2.2.0",
     "rxjs": "~7.5.0",
     "save": "^2.4.0",
     "tslib": "^2.3.0",

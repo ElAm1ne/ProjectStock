@@ -23,11 +23,25 @@ export class CandlestickComponent implements OnInit {
   @Input() ticker: string;
   @Input() start: string;
   @Input() end: string;
+  @Input() which: string;
+  @Input() tickers: string;
+  @Input() percentages: string;
+  @Input() amount: string;
   constructor(private http: HttpClient) {}
 
   ngOnInit(){
     this.csdata = [];
-    this.http.get(`http://localhost:9009/api/stocks/stockBetween?ticker=${this.ticker}&start=${this.start}&end=${this.end}`).subscribe((stockData : any) => {
+    let api_res;
+    if (this.which = "B") {
+      console.log("Backtest")
+      api_res = this.http.get(`http://localhost:9009/api/stocks/backtest?valptf=${this.amount}&tickers=${this.tickers}&percentages=${this.percentages}&start=${this.start}&end=${this.end}`);
+    }
+    else
+    {
+      console.log("Betweendates")
+      api_res = this.http.get(`http://localhost:9009/api/stocks/stockBetween?ticker=${this.ticker}&start=${this.start}&end=${this.end}`);
+    }
+    api_res.subscribe((stockData : any) => {
       for (const date in stockData) {
         if (stockData.hasOwnProperty(date)) {
           const { '1. open': open, '2. high': high, '3. low': low, '4. close': close } = stockData[date];
@@ -38,6 +52,7 @@ export class CandlestickComponent implements OnInit {
         }
       }
     });
+    console.log(this.csdata);
 
     this.chartOptions = {
       series: [
