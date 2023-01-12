@@ -1,3 +1,8 @@
+<div class="container">
+<p> Here we present the most requested stocks. </p>
+<p> You can select two dates and a stock.  </p>
+<p> We're going to give you detailed information.  </p>
+</div>
 <form (ngSubmit)="onSubmit()">
     <div class="form-group">
         <label for="ticker">Ticker:</label>
@@ -14,9 +19,10 @@
     <button type="submit">Submit</button>
   </form>
 
-  <div  class="text-bg-primary p-3" *ngIf=data> 
-    <p>Le nombre de recherche pour ce stock est de : {{ data }}</p>
+  <div class= "container" *ngIf=data> 
+    <p>Le nombre de recherche pour ce stock est de : {{data}}</p>
   </div>
+
   <p> Voici un classement du top 10 des stocks les plus recherchés</p>
   <table>
     <thead>

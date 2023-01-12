@@ -1,3 +1,7 @@
+<div class="container">
+    <p> Ask us any stock right there !</p>
+</div>
+
 <form (ngSubmit)="onSubmit()">
     <div class="form-group">
         <label for="ticker">Ticker:</label>
@@ -6,13 +10,13 @@
     <div class="form-group">
     <label for="date">Date:</label>
     <input  type="date" id="date" [(ngModel)]="date" name="date">
-    </div>
-    <button type="submit">Submit</button>
+    </div> 
+    <button type="submit"> Submit</button>
   </form>
 
-  <div *ngIf="data">
-    <p>Ticker: {{ data.ticker }}</p>
-    <p>Date: {{ data.date }}</p>
+  <div  class="table table-striped" *ngIf="data">
+    <p>Ticker: {{ data.ticker    }}</p>
+    <p>Date: {{ data.date |  date: 'yyyy-MM-dd' }}</p>
     <p>Open: {{ data['1. open'] }}</p>
     <p>High: {{ data['2. high'] }}</p>
     <p>Low: {{ data['3. low'] }}</p>
@@ -22,3 +26,6 @@
     <p>Dividend Amount: {{ data['7. dividend amount'] }}</p>
     <p>Split Coefficient: {{ data['8. split coefficient'] }}</p>
   </div>
+
+
+

@@ -20,7 +20,7 @@ topn: any;
 constructor(private http: HttpClient) {}
 
 onSubmit() {
-  this.http.get(`http://localhost:9009/api/stock-history/views/totalTicker?ticker=${this.ticker}&startDate=${this.startDate}&endDate=${this.endDate}`)
+  this.http.get(`http://localhost:9009/api/stock-history/views/totalTicker?ticker=${this.ticker}&start=${this.startDate}&end=${this.endDate}`)
   .subscribe(data => {
   this.data = data;
   });
