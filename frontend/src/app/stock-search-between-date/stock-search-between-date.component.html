@@ -1,4 +1,9 @@
 
+<div class="container"> 
+    <p> Here you can ask us the price of a stock between two dates. </p>
+    <p> We are going to provide a CandleStick Chart. </p>
+    <p> So you can see all information. </p>
+</div>
   <form (ngSubmit)="onSubmit()">
     <div class="form-group">
         <label for="ticker">Ticker:</label>
@@ -43,10 +48,9 @@
       </tr>
     </tbody>
   </table>
-  <div class = "container">
+  <div>
     <app-candlestick [ticker]="ticker" [start]="start" [end]="end"></app-candlestick>
   </div>
-  <div class = "container">
-    <app-treemap [start]="start" [end]="end"></app-treemap>
-  </div>
+
+
 

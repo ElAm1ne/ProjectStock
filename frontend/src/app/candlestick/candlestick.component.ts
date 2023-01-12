@@ -63,7 +63,7 @@ export class CandlestickComponent implements OnInit {
         }
       }
     };
-    
+
 
   }
 
