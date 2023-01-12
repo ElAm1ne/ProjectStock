@@ -54,12 +54,11 @@ export class StockSearchBetweenDateComponent implements OnInit{
       this.data = Object.values(data);
 
     });
-    this.child.which = url;
     this.child.ngOnInit();
 
 
 
-    setTimeout(() => window.dispatchEvent(new Event('resize')), 2000);
+    setTimeout(() => window.dispatchEvent(new Event('resize')), 5000);
 
   }
 
