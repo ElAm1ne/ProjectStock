@@ -1,6 +1,8 @@
 Ce projet est developpé en <b>Java</b> en utilisant le <b>Spring</b> framework en utilisant les technologies <b>Spring Boot</b>, <b>Spring data JPA</b>, <b>Lombok</b>. 
 Il s'articule autour de l'architecture microservice avec 3 couches (<b>Model, Service, Controller</b>).
 
+L'application <b>frontend est écrite Angular</b>, vous pouvez consulter son repository à travers ce lien : 
+<p><a href="https://github.com/ElAm1ne/Stockfy" target="_blank"><strong>https://github.com/ElAm1ne/Stockfy</strong></a></p>
 Le projet permet deux fonctionnalités principales :
 - La <b>consultation du cours d'une action</b> à partir de son ticker et une date de début, une date de fin.
 - Un <b>système d'audit des recherches réalisées sur le site</b>, le stock le plus recherché sur une période etc...
