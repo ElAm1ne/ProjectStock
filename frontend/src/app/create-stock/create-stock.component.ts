@@ -20,7 +20,7 @@ export class CreateStockComponent implements OnInit {
 
 
   onSubmit() {
-    this.http.get(`http://localhost:9009/api/stocks/stock?ticker=${this.ticker}&date=${this.date}`)
+    this.http.get(`https://projectstockif.azurewebsites.net/api/stocks/stock?ticker=${this.ticker}&date=${this.date}`)
       .subscribe(data => {
         this.data = data;
       });

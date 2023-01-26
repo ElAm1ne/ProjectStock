@@ -20,11 +20,11 @@ topn: any;
 constructor(private http: HttpClient) {}
 
 onSubmit() {
-  this.http.get(`http://localhost:9009/api/stock-history/views/totalTicker?ticker=${this.ticker}&start=${this.startDate}&end=${this.endDate}`)
+  this.http.get(`https://projectstockif.azurewebsites.net/api/stock-history/views/totalTicker?ticker=${this.ticker}&start=${this.startDate}&end=${this.endDate}`)
   .subscribe(data => {
   this.data = data;
   });
-  this.http.get(`http://localhost:9009/api/stock-history/views/topn?start=${this.startDate}&end=${this.endDate}&n=10`)
+  this.http.get(`https://projectstockif.azurewebsites.net/api/stock-history/views/topn?start=${this.startDate}&end=${this.endDate}&n=10`)
   .subscribe(topn => {
   this.topn = Object.values(topn);
   });

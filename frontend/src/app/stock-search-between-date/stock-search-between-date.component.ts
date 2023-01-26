@@ -46,7 +46,7 @@ export class StockSearchBetweenDateComponent implements OnInit{
 
   onSubmit() {
 
-    const url = `http://localhost:9009/api/stocks/stockBetween?ticker=${this.ticker}&start=${this.start}&end=${this.end}`;
+    const url = `https://projectstockif.azurewebsites.net/api/stocks/stockBetween?ticker=${this.ticker}&start=${this.start}&end=${this.end}`;
 
     this.http.get(url).subscribe(data => {
 

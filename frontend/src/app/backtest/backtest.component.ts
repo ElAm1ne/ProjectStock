@@ -31,7 +31,7 @@ export class BacktestComponent implements OnInit {
 
   onSubmit() {
 
-    const url = `http://localhost:9009/api/stocks/backtest?valptf=${this.amount}&tickers=${this.tickers}&percentages=${this.percentages}&start=${this.start}&end=${this.end}`;
+    const url = `https://projectstockif.azurewebsites.net/api/stocks/backtest?valptf=${this.amount}&tickers=${this.tickers}&percentages=${this.percentages}&start=${this.start}&end=${this.end}`;
     let res = this.http.get(url);
     
     res.subscribe(data => {

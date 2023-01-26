@@ -30,7 +30,7 @@ export class TreemapComponent implements OnInit {
     console.log(this.end);
     this.tmdata = [];
     let elm : any;
-    const apiUrl = `http://localhost:9009/api/stock-history/views/topn?start=${this.start}&end=${this.end}&n=10`;
+    const apiUrl = `https://projectstockif.azurewebsites.net/api/stock-history/views/topn?start=${this.start}&end=${this.end}&n=10`;
     this.http.get(apiUrl).pipe(
       map((data : any) => 
         {
