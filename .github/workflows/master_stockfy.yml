@@ -22,6 +22,7 @@ jobs:
           node-version: '18.x'
 
       - name: npm install, build, and test
+        working-directory: ./frontend
         run: |
           npm install
           npm run build --if-present
@@ -30,7 +31,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: node-app
-          path: .
+          path: ./frontend
 
   deploy:
     runs-on: ubuntu-latest
@@ -52,4 +53,5 @@ jobs:
           app-name: 'Stockfy'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B6B2212DFF6543008F7BA4FBD6C68751 }}
+          working-directory: ./frontend
           package: .
