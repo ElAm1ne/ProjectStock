@@ -1,0 +1,42 @@
+<div class="container">
+<p> Here we present the most requested stocks. </p>
+<p> You can select two dates and a stock.  </p>
+<p> We're going to give you detailed information.  </p>
+</div>
+<form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="ticker">Ticker:</label>
+        <input type="text" id="ticker" [(ngModel)]="ticker" name="ticker">
+        </div>
+    <div class="form-group">
+    <label for="start"> Start date:</label>
+    <input  type="date" id="start" [(ngModel)]="startDate" name="start">
+    </div>
+    <div class="form-group">
+        <label for="end"> End date:</label>
+        <input  type="date" id="end" [(ngModel)]="endDate" name="end">
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+
+  <div class= "container" *ngIf=data> 
+    <p>Le nombre de recherche pour ce stock est de : {{data}}</p>
+  </div>
+
+  <p> Voici un classement du top 10 des stocks les plus recherchés</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Stock</th>
+        <th>Views</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let row of topn">
+        <tr>
+          <td>{{ row[0] }}</td>
+          <td>{{ row[1] }}</td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>

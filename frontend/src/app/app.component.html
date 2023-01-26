@@ -1,19 +1,63 @@
-<nav class = "navbar navbar-expand-sm bg-primary navbar-dark">
-  <ul class = "navbar-nav">
-      <li class = "nav-item">
-          <a routerLink="StockSearchHistories" routerLinkActive ="active" class="nav-link"> StockSearchHistoriesList </a>
-          <a routerLink="getStock" routerLinkActive ="active" class="nav-link"> Rechercher des stocks </a>
+<style>
+  .banner {
+      /* The image used */
+      background-image:
+      /*linear gradient overlay*/
+      linear-gradient(to top right, rgba(13,110,253, 0.30) 10%, rgba(0,0,0, 0.20 ) 60%),
+      url("mountains.jpg");
+      /* Create the parallax scrolling effect */
+      background-attachment: fixed;
+      /* Prevent image from repeating */
+      background-repeat: no-repeat;
+      /* Set height */
+      height: auto;
+      /* Set background size */
+      background-size:cover;
+      /* Set background position */
+      background-position:right center
+    }
+  </style>
+  <div class="banner">
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"> Algorithmic Trading </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarScroll">
+        <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/#services">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/auditStock" routerLink="auditStock" routerLinkActive ="active"> Get Stock Research History </a>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link" href="/stockSearchHistory" routerLink="stockSearchHistory" routerLinkActive ="active" > Get Stock Prices </a>
+          </li>
+     
+        <li class="nav-item">
+         <a class="nav-link" href="/stockBetweenDate" routerLink="stockBetweenDate" routerLinkActive ="active"> Get Stock Between Date </a>
+       </li>
+       <li class="nav-item">
+        <a class="nav-link" href="/backTest" routerLink="backTest" routerLinkActive ="active"> BackTest your portfolio here ! </a>
       </li>
-  </ul>
-</nav>
+      <li class="nav-item">
+        <a class="nav-link" href="/backtestCandle" routerLink="backtestCandle" routerLinkActive ="active">  BackTest with Candle Stick Chart!  </a>
+      </li>
+      <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Link</a>
+      </li>
+        </ul>
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-light" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+  </div>
+  <router-outlet></router-outlet>
 
-<div class="container">
-  <router-outlet> </router-outlet>
-</div>
-<div class = "container">
-  <app-date-picker></app-date-picker>
-</div>
-<div class = "container">
-  <app-candlestick></app-candlestick>
-</div>
 

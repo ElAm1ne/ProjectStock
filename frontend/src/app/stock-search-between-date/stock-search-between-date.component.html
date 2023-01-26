@@ -1,0 +1,57 @@
+
+<div class="container"> 
+    <p> Here you can ask us the price of a stock between two dates. </p>
+    <p> We are going to provide a CandleStick Chart. </p>
+    <p> So you can see all information. </p>
+    <p> !!!The CandleStick chart may take several seconds to show.!!! </p>
+</div>
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="ticker">Ticker:</label>
+        <input type="text" id="ticker" [(ngModel)]="ticker" name="ticker">
+        </div>
+    <div class="form-group">
+    <label for="start">Start date:</label>
+    <input  type="date" id="start" [(ngModel)]="start" name="start">
+    </div>
+    <div class="form-group">
+        <label for="end">End date:</label>
+        <input  type="date" id="end" [(ngModel)]="end" name="end">
+        </div>
+    <button type="submit">Submit</button>
+  </form>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Open</th>
+        <th>High</th>
+        <th>Low</th>
+        <th>Close</th>
+        <th>Adjusted Close</th>
+        <th>Volume</th>
+        <th>Dividend Amount</th>
+        <th>Split Coefficient</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of data | orderBy: order : false : true">
+        <td>{{ item['date'] | date: 'yyyy-MM-dd'}}</td>
+        <td>{{ item['1. open'] }}</td>
+        <td>{{ item['2. high'] }}</td>
+        <td>{{ item['3. low'] }}</td>
+        <td>{{ item['4. close'] }}</td>
+        <td>{{ item['5. adjusted close'] }}</td>
+        <td>{{ item['6. volume'] }}</td>
+        <td>{{ item['7. dividend amount'] }}</td>
+        <td>{{ item['8. split coefficient'] }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+    <app-candlestick [ticker]="ticker" [start]="start" [end]="end"></app-candlestick>
+  </div>
+
+
+

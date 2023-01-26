@@ -5,5 +5,9 @@ export class StockSearchHistory {
 
     date: string; 
 
+    start: string; 
+
+    end: string; 
+
     views: number;
 }

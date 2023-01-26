@@ -11,8 +11,21 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Entity
 @Table(name = "stocks")
 @Data
-@NoArgsConstructor
+
 public class Stock {
+    public Stock() {
+        this.id = 0L;
+        this.ticker = "";
+        this.date = new Date();
+        this.open = 0.0;
+        this.high = 0.0;
+        this.low = 0.0;
+        this.close = 0.0;
+        this.adjustedClose = 0.0;
+        this.volume = 0;
+        this.dividendAmount = 0.0;
+        this.splitCoefficient = 0.0;
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -1,0 +1,36 @@
+<div class="container"> 
+    <p> Here you can backtest your portfolio between two dates. </p>
+    <p> Try this portfolio : AAPL,GOOG,AMZN and percentage 0.5,0.3,0.2.</p>
+    <p> Dont forget, you need the same number of percentages as the number of stocks in your portfolio.</p>
+    <p> The percentages should sum to 1 !</p>
+    <p> We are going to provide a CandleStick Chart. </p>
+    <p> So you can see all information. </p>
+</div>
+<form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="amount">Portfolio initial amount ($):</label>
+        <input type="text" id="amount" [(ngModel)]="amount" name="amount">
+        </div>
+        <div class="form-group">
+            <label for="tickers">Tickers ex : (AAPL,AMZN,GOOG):</label>
+            <input type="text" id="tickers" [(ngModel)]="tickers" name="tickers">
+            </div>
+            <div class="form-group">
+                <label for="percentages">Percentages ex : (0.5,0.2,0.3,...):</label>
+                <input type="text" id="percentages" [(ngModel)]="percentages" name="percentages">
+                </div>
+    <div class="form-group">
+    <label for="start">Start date:</label>
+    <input  type="date" id="start" [(ngModel)]="start" name="start">
+    </div>
+    <div class="form-group">
+        <label for="end">End date:</label>
+        <input  type="date" id="end" [(ngModel)]="end" name="end">
+        </div>
+    <button type="submit">Backtest</button>
+  </form>
+
+
+  <div>
+    <app-candlestick2 [tickers]="tickers" [amount]="amount" [percentages]="percentages" [start]="start" [end]="end"></app-candlestick2>
+  </div>

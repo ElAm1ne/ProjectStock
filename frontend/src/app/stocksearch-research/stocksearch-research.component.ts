@@ -13,6 +13,7 @@ export class StocksearchResearchComponent implements OnInit {
 
   ngOnInit(): void {
       this.stockSearchList() ; 
+
   }
 
   private stockSearchList(){

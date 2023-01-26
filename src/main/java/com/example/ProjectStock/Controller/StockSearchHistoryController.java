@@ -39,9 +39,9 @@ public class StockSearchHistoryController {
     }
 
 
-    @GetMapping("/{ticker}/views/total")
-    public Long getTotalViewsForTickerBetweenDates(@PathVariable String ticker, @RequestParam Date startDate, @RequestParam Date endDate) {
-        return stockSearchHistoryService.getTotalViewsForTickerBetweenDates(ticker, startDate, endDate);
+    @GetMapping("/views/totalTicker")
+    public Long getTotalViewsForTickerBetweenDates(@RequestParam("ticker") String ticker, @RequestParam("start") String startDate, @RequestParam("end") String endDate) throws ParseException {
+        return stockSearchHistoryService.getTotalViewsForTickerBetweenDates(ticker, new SimpleDateFormat("yyyy-MM-dd").parse(startDate), new SimpleDateFormat("yyyy-MM-dd").parse(endDate));
     }
     @GetMapping("/views/top")
     public List<Object[]> getTopViewsByTicker( @RequestParam("start") String start_date, @RequestParam("end") String end_date) throws ParseException{

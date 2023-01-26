@@ -17,7 +17,16 @@ import {MatButtonModule} from '@angular/material/button'
 import {MatFormFieldModule} from '@angular/material/form-field'
 import {MatInputModule} from '@angular/material/input'
 import { MatNativeDateModule } from '@angular/material/core';
-
+import { StockSearchBetweenDateComponent } from './stock-search-between-date/stock-search-between-date.component';
+import { AuditStockComponent } from './audit-stock/audit-stock.component';
+import { HomeComponent } from './home/home.component';
+import { TreemapComponent } from './treemap/treemap.component';
+import { BacktestComponent } from './backtest/backtest.component';
+import { KeyValuePipe } from '@angular/common';
+import { OrderPipe } from 'ngx-order-pipe';
+import { OrderModule } from 'ngx-order-pipe';
+import { Candlestick2Component } from './candlestick2/candlestick2.component';
+import { BacktestcandleComponent } from './backtestcandle/backtestcandle.component';
 
 
 @NgModule({
@@ -28,16 +37,24 @@ import { MatNativeDateModule } from '@angular/material/core';
     CandlestickComponent,
     SearchComponent,
     DatePickerComponent,
+    StockSearchBetweenDateComponent,
+    AuditStockComponent,
+    HomeComponent,
+    TreemapComponent,
+    BacktestComponent,
+    Candlestick2Component,
+    BacktestcandleComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule, 
+    AppRoutingModule,
     HttpClientModule,
     FormsModule, NgApexchartsModule, BrowserAnimationsModule,MatDatepickerModule,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    OrderModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
