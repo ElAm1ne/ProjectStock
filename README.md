@@ -13,7 +13,7 @@ L'hebergement complet (BDD + Backend) sont fait chez le fournisseur <b>cloud Azu
 
 Le projet est en <b>CI-CD</b> en utilisant <b>GitHub Actions</b> et l'intégration <b>Azure</b>, un script de build et deploiement du Jar existe dans le repository et est lancé à chaque push dans la branche master.
 
-<b>Quelques requêtes à l'API backend : </b>
+<b>Quelques requêtes à l'API backend (P.S: la version étudiante de Azure a un TimeOut sur le serveur de 30 minutes, il faudra peut être attendre le lancement du serveur à l'execution de la requête, ceci prend 2 minutes en moyenne : </b>
 <li>Accéder à l'historique du cours d'<b>Apple</b> au 14/11/2022 :</li> 
 <strong><a href="https://projectstockif.azurewebsites.net/api/stocks/stockBetween?ticker=AAPL&amp;start=2022-11-14&amp;end=2022-11-14" target="_blank">https://projectstockif.azurewebsites.net/api/stocks/stockBetween?ticker=AAPL&amp;start=2022-11-14&amp;end=2022-11-14</a></strong>
 <li><b>Backtest</b> d'un portefeuille composé de <b>Apple, Amazon et Google avec des pourcentages de 50%, 20%, 30%</b> respectivement entre le <b>01/04/2023 et le 11/01/2023</b> :</li>
