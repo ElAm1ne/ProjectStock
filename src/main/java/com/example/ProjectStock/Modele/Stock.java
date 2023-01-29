@@ -43,6 +43,21 @@ public class Stock {
     @JsonProperty("3. low")
     @Column(name = "low")
     private Double low;
+
+    public Stock(Long id, String ticker, Date date, Double open, Double high, Double low, Double close, Double adjustedClose, long volume, Double dividendAmount, Double splitCoefficient) {
+        this.id = id;
+        this.ticker = ticker;
+        this.date = date;
+        this.open = open;
+        this.high = high;
+        this.low = low;
+        this.close = close;
+        this.adjustedClose = adjustedClose;
+        this.volume = volume;
+        this.dividendAmount = dividendAmount;
+        this.splitCoefficient = splitCoefficient;
+    }
+
     @JsonProperty("4. close")
     @Column(name = "close")
     private Double close;
