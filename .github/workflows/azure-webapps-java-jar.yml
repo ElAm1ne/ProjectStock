@@ -49,7 +49,7 @@ jobs:
       - name: Build with Maven
         run: mvn clean install
       - name: Test with Maven
-        run: mvn clean test
+        run: mvn test
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
